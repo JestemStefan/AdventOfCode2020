@@ -34,19 +34,7 @@ def is_valid_password(s, key, range_min, range_max):
 
 
 def is_valid_password2(s, key, pos1, pos2):
-
-    counter = 0
-    if s[pos1] == key:
-        counter += 1
-    
-    if s[pos2] == key:
-        counter += 1
-
-    if counter == 1:
-        return True
-    
-    else:
-        return False
+    return (s[pos1] == key) ^ (s[pos2] == key)
 
 
 
