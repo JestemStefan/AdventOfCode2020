@@ -1,27 +1,37 @@
 def main():
 
-    proccessed_input = []
+    valid_pasword_count = 0
     with open("2/Input.txt") as input_file:
         for line in input_file.readlines():
 
             input_line = line.strip().split()
             valid_range = input_line[0].split("-")
+            range_min = ''.join(filter(str.isdigit, valid_range[0]))
+            range_max = ''.join(filter(str.isdigit, valid_range[1]))
             valid_key = input_line[1].replace(":","")
             password = input_line[2]
 
-            proccessed_input.append([valid_range, valid_key, password])
+            valid = is_valid_password(password, valid_key, int(range_min), int(range_max) + 1)
+            
+            if valid:
+                valid_pasword_count +=1
+
+            #print(vali)d
+
+    print("Amount of valid password: " + str(valid_pasword_count))
         
-        print(proccessed_input)
 
-
-def count_letters(s, key, range_min, range_max):
-
+def is_valid_password(s, key, range_min, range_max):
+    #print([s,key, range_min, range_max])
     count = 0
 
-    if key in s:
-        count +=1
-
-    print(count)
+    for char in s:
+        if key == char:
+            count +=1
+    if count in range(range_min, range_max):
+        return True
+    else:
+        return False
         
 
 
