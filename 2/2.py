@@ -22,12 +22,9 @@ def main():
 
 def is_valid_password(s, key, range_min, range_max):
     #print([s,key, range_min, range_max])
-    count = 0
+    counter = s.count(key)
 
-    for char in s:
-        if key == char:
-            count +=1
-    if count in range(range_min, range_max):
+    if counter in range(range_min, range_max):
         return True
     else:
         return False
