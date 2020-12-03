@@ -16,13 +16,11 @@ def main():
 def slope_path(input_map):
 
     char_index = 0
-    
     tree_counter = 0
 
     for index, row in enumerate(input_map):
-        char_index = 3 * index
 
-        char_index = char_index % 31
+        char_index = (3 * index) % 31 
 
         if input_map[index][char_index] == "#":
             tree_counter += 1
