@@ -12,9 +12,10 @@ def main():
     #Task1
     number_of_trees = slope_path(processed_input)
 
-    print(number_of_trees)
+    print("Task 1 answer is " + str(number_of_trees))
 
 
+    # Task2
     answer = 1
 
     for slope_dimensions in [[1,1], [1,3], [1,5], [1,7], [2,1]]:
@@ -24,7 +25,7 @@ def main():
 
         answer *= number_of_trees
 
-    print("Answer is: " + str(answer))
+    print("Task 2 answer is " + str(answer))
         
 
 
