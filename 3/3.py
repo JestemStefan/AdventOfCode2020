@@ -39,9 +39,11 @@ def slope_path(input_map):
 
         row_length = len(row) - 1
 
+        # check if character in this position is a tree ("#")
         if row[char_index] == "#":
             tree_counter += 1
 
+        # move down the slope
         char_index = (char_index + 3) % row_length
 
     return(tree_counter)
