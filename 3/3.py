@@ -1,3 +1,5 @@
+import cProfile as cp
+
 def main():
 
     processed_input = []
@@ -71,6 +73,6 @@ def slope_path2(input_map, slope_length, slope_height):
     return(tree_counter)
 
 
+cp.run("main()")
 
-main()
 
