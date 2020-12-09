@@ -73,8 +73,9 @@ def main():
 ##################### END OF TASK 1 ######################################
     answer = 0
 
-    for bags in bag_dict["shiny gold"]:
-        answer += count_bags(bag_dict, bags)
+    bags = bag_dict["shiny gold"][0]
+
+    answer = int(bags[0]) * count_bags(bag_dict, bags)
 
     print(answer)
 
@@ -82,23 +83,11 @@ def main():
 
 def count_bags(bag_dict, outer_bag):
 
-    #print(outer_bag)
-    number = int(outer_bag[0])
-    suma = 0
+    number = 1
     
-    print(bag_dict[outer_bag[1]])
-
     for inside_bags in bag_dict[outer_bag[1]]:
-        print(inside_bags)
 
-        if bag_dict[outer_bag[1]] != []:
-        
-            number += int(inside_bags[0]) * count_bags(bag_dict, inside_bags)
-
-        else:
-            return 1
-
-        
+        number += int(inside_bags[0]) * count_bags(bag_dict, inside_bags)
 
     return number
 
