@@ -1,9 +1,11 @@
+
 def main():
 
     processed_input = []
+    bag_dict = {}
 
     with open("7/Input.txt") as input_file:
-        bag_dict = {}
+        
         
     
         for line in input_file.readlines():
@@ -40,27 +42,96 @@ def main():
                             inside_bags.append(inside_bag_pattern_color)
 
             bag_dict[pattern_and_color] = inside_bags
+
+
+    # find and remove empty bags
+    return_remove = find_empty_bags(bag_dict)
+    empty_bags_list = return_remove[0]
+    full_bags_dict = return_remove[1]
+
+    # remove empty bags from sub bags
+    full_bags_dict = remove_empty_bags(full_bags_dict, empty_bags_list)
+
+    #print(full_bags_dict)
+
+    list_of_bags_with_shiny_gold = []
+    for bag_pattern_color in bag_dict:
+
+        if search_shiny_gold(full_bags_dict, bag_pattern_color, "shiny gold"):
+            list_of_bags_with_shiny_gold.append(bag_pattern_color)
+
+
+    print(len(set(list_of_bags_with_shiny_gold)))
+
+
+
+
+
+
+
+
+def find_empty_bags(bag_dict):
+
+    empty_bag_list = []
+    temp_bag_dict = list(bag_dict.keys())
+    not_empty_bags = bag_dict
+
+    for bag_pattern in temp_bag_dict:
+
+        if len(bag_dict[bag_pattern]) == 0:
+
+            empty_bag_list.append(bag_pattern)
+            not_empty_bags.pop(bag_pattern)
+        
+        else:
+            pass
+    
+    return [empty_bag_list, not_empty_bags]
+
+
+def remove_empty_bags(bag_dict, empty_bags):
+
+    full_bags_dict = {}
+
+    # check each bag type
+    for bag_pattern in bag_dict:
+        
+        # list of bags that can be inside this bag
+        temp_bag_patterns = bag_dict[bag_pattern]
+
+        full_bags = []
+
+        # check what type of bags are inside
+        for bag in temp_bag_patterns:
+
+            # if bag in empty
+            if bag in empty_bags:
+
+                # remove bag from list
+                # print(bag)
+                pass
             
-            print(pattern_and_color)
-            print(bag_dict[pattern_and_color])
+            # save bag back to dict
+            else:
+                full_bags.append(bag)
 
-        processed_input.append(line)
+        full_bags_dict[bag_pattern] = full_bags
+
+    return full_bags_dict
 
 
-        #search_bags(pattern_dict, key, pattern_dict[key])
 
+def search_shiny_gold(bag_dict, bag_pattern_color, desiered_bag):
 
-def search_bags(pattern_dictionary, pattern, color):
+    if desiered_bag in bag_dict[bag_pattern_color]:
+        return True
 
-    pass
-    #print(pattern)
-    #print(pattern_dictionary[pattern])
-
-    #bag_type = pattern_dictionary[pattern][color]
-
-    #for i in bag_type:
-
-        #print(i)
+    else:
+        
+        for bag in bag_dict[bag_pattern_color]:
+            
+            if search_shiny_gold(bag_dict, bag, "shiny gold"):
+                return True
 
 
 
