@@ -1,3 +1,5 @@
+import cProfile as cp
+
 
 def main():
 
@@ -55,16 +57,13 @@ def main():
     #print(full_bags_dict)
 
     list_of_bags_with_shiny_gold = []
-    for bag_pattern_color in bag_dict:
+    for bag_pattern_color in full_bags_dict:
 
         if search_shiny_gold(full_bags_dict, bag_pattern_color, "shiny gold"):
             list_of_bags_with_shiny_gold.append(bag_pattern_color)
 
 
     print(len(set(list_of_bags_with_shiny_gold)))
-
-
-
 
 
 
@@ -127,14 +126,13 @@ def search_shiny_gold(bag_dict, bag_pattern_color, desiered_bag):
         return True
 
     else:
-        
         for bag in bag_dict[bag_pattern_color]:
-            
+
             if search_shiny_gold(bag_dict, bag, "shiny gold"):
                 return True
 
 
 
 
-
 main()
+#cp.run("main()")
