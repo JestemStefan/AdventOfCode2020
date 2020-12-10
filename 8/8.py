@@ -13,25 +13,24 @@ def main():
 
             commands.append(line)
 
+
     switch_command_index = 0
     result = False
 
     while result == False:
 
-        test_commands = copy.deepcopy(commands)
-
-        command_to_switch = test_commands[switch_command_index][0]
-        test_commands[switch_command_index][0] = switch_command(command_to_switch)
-
         switch_command_index += 1
 
-        result = isInfiniteLoop(test_commands)
+        if commands[switch_command_index][0] == "acc":
+            continue
+        
+        else:
+            result = isInfiniteLoop(commands, switch_command_index)
 
-        #print(result)
 
     print(result)
 
-def isInfiniteLoop(commands):
+def isInfiniteLoop(commands, switch_comm_index):
 
     command_index = 0
     accumulator = 0
@@ -56,9 +55,8 @@ def isInfiniteLoop(commands):
             loop = True
             
         else:
+            command_output = execute_commond(command_index, commands, switch_comm_index)
             
-            command_output = execute_commond(command_index, commands)
-
             command_index += command_output[0]
             accumulator += command_output[1]
     
@@ -81,9 +79,13 @@ def switch_command(command):
 
 
 
-def execute_commond(command_index, commands_input):
+def execute_commond(command_index, commands_input, switch_comm_index):
 
     command = commands_input[command_index][0]
+
+    if switch_comm_index == command_index:
+        command = switch_command(command)
+
     variable = int(commands_input[command_index][1])
 
     if command == "jmp":
