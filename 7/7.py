@@ -24,49 +24,74 @@ def main():
             inside_bags = []
 
             if len_line >= 8:
-
+                
+                number_of_bags = line[4]
                 inside_bag_pattern_color = line[5] + " " + line[6]
-                inside_bags.append(inside_bag_pattern_color)
+                inside_bags.append([number_of_bags, inside_bag_pattern_color])
 
                 if len_line >= 12:
-
+                    
+                    number_of_bags = line[8]
                     inside_bag_pattern_color = line[9] + " " + line[10]
-                    inside_bags.append(inside_bag_pattern_color)
+                    inside_bags.append([number_of_bags, inside_bag_pattern_color])
 
                     if len_line >= 16:
-
+                        
+                        number_of_bags = line[12]
                         inside_bag_pattern_color = line[13] + " " + line[14]
-                        inside_bags.append(inside_bag_pattern_color)
+                        inside_bags.append([number_of_bags, inside_bag_pattern_color])
 
                         if len_line >= 20:
-
+                            
+                            number_of_bags = line[16]
                             inside_bag_pattern_color = line[17] + " " + line[18]
-                            inside_bags.append(inside_bag_pattern_color)
+                            inside_bags.append([number_of_bags, inside_bag_pattern_color])
 
             bag_dict[pattern_and_color] = inside_bags
 
 
+    ################## TASK 1 ###############################
     # find and remove empty bags
-    return_remove = find_empty_bags(bag_dict)
-    empty_bags_list = return_remove[0]
-    full_bags_dict = return_remove[1]
+    #return_remove = find_empty_bags(bag_dict)
+    #empty_bags_list = return_remove[0]
+    #full_bags_dict = return_remove[1]
 
     # remove empty bags from sub bags
-    full_bags_dict = remove_empty_bags(full_bags_dict, empty_bags_list)
+    #full_bags_dict = remove_empty_bags(full_bags_dict, empty_bags_list)
 
     #print(full_bags_dict)
 
-    list_of_bags_with_shiny_gold = []
-    for bag_pattern_color in full_bags_dict:
+    #list_of_bags_with_shiny_gold = []
+    #for bag_pattern_color in full_bags_dict:
 
-        if search_shiny_gold(full_bags_dict, bag_pattern_color, "shiny gold"):
-            list_of_bags_with_shiny_gold.append(bag_pattern_color)
-
-
-    print(len(set(list_of_bags_with_shiny_gold)))
+        #if search_shiny_gold(full_bags_dict, bag_pattern_color, "shiny gold"):
+            #list_of_bags_with_shiny_gold.append(bag_pattern_color)
 
 
+    #print(len(set(list_of_bags_with_shiny_gold)))
 
+##################### END OF TASK 1 ######################################
+    answer = 0
+
+    bags = bag_dict["shiny gold"][0]
+
+    answer = int(bags[0]) * count_bags(bag_dict, bags)
+
+    print(answer)
+
+
+
+def count_bags(bag_dict, outer_bag):
+
+    number = 1
+    
+    for inside_bags in bag_dict[outer_bag[1]]:
+
+        number += int(inside_bags[0]) * count_bags(bag_dict, inside_bags)
+
+    return number
+
+    
 
 
 def find_empty_bags(bag_dict):
@@ -86,7 +111,6 @@ def find_empty_bags(bag_dict):
             pass
     
     return [empty_bag_list, not_empty_bags]
-
 
 def remove_empty_bags(bag_dict, empty_bags):
 
@@ -117,8 +141,6 @@ def remove_empty_bags(bag_dict, empty_bags):
         full_bags_dict[bag_pattern] = full_bags
 
     return full_bags_dict
-
-
 
 def search_shiny_gold(bag_dict, bag_pattern_color, desiered_bag):
 
