@@ -27,9 +27,9 @@ def main():
 
         result = isInfiniteLoop(test_commands)
 
-        print(result)
+        #print(result)
 
-    #print(result)
+    print(result)
 
 def isInfiniteLoop(commands):
 
@@ -66,14 +66,14 @@ def isInfiniteLoop(commands):
     
 
 def switch_command(command):
-    print("command to switch: " + str(command))
+    #print("command to switch: " + str(command))
 
     if command == "jmp":
-        print("switched jmp to nop")
+        #print("switched jmp to nop")
         return "nop"
 
     elif command == "nop":
-        print("switched nop to jmp")
+        #print("switched nop to jmp")
         return "jmp"
     
     else:
@@ -106,6 +106,6 @@ def execute_commond(command_index, commands_input):
 
 
 
-#cp.run("main()")
+cp.run("main()")
 
-main()
+#main()
