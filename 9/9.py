@@ -15,11 +15,15 @@ def main():
     preamble = 25
     number_index = 0
 
+    
+
     while loop != True:
 
         loop = check_if_NOT_sum(processed_input, number_index, preamble)
         number_index += 1
 
+    invalid_number = processed_input[number_index + preamble - 1] 
+    print(invalid_number)
 
 
         
@@ -42,10 +46,8 @@ def check_if_NOT_sum(number_input, number_index, preamble):
             return False
 
     else:
-        print("number index: " + str(number_index + preamble))
-        print("answer number: " + str(test_number))
         return True
     
     
-cp.run("main()")
-#main()
+#cp.run("main()")
+main()
