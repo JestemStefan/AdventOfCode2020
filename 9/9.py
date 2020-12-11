@@ -1,4 +1,4 @@
-import cProfile as cp
+import cProfile
 
 def main():
 
@@ -33,12 +33,14 @@ def main():
 
     loop = False
     number_index = 0
-    for idx, number in enumerate(num_input_list):
+
+    for idx in range(len(num_input_list)):
 
         return_value = find_continous_sum(num_input_list, idx, invalid_number)
 
         if return_value:
             print("Answer: " + str(min(return_value) + max(return_value)))
+            return return_value
 
     
 
@@ -86,7 +88,5 @@ def find_continous_sum(num_input, start_index, target):
 
     return num_input[start_index:end_index]
 
-
-
-cp.run("main()")
 #main()
+cProfile.run("main()")
